@@ -2,7 +2,7 @@
 
 > ⚠️ **Work in Progress**: This project is currently in active development and experimentation. The API and model outputs may change as we refine the system. We welcome feedback and contributions!
 
-A powerful AI-powered PDF-frame template generator that uses fine-tuned language models to create optimized PDF frame templates based on natural language instructions.
+A powerful AI-powered PDF-frame template generator that uses fine-tuned language models to create optimized PDF-frame templates based on natural language instructions.
 
 ## Motivation
 
@@ -12,7 +12,7 @@ The motivation behind this project is to streamline this process using AI, allow
 
 ## Features
 
-- Generate PDF frame templates from natural language instructions
+- Generate PDF-Frame templates from natural language instructions
 - Fine-tuned on StarCoder2-7B model
 - GPU-accelerated inference
 - REST API interface via FastAPI
@@ -106,7 +106,7 @@ Once the server is running, visit `http://localhost:8000/docs` for interactive A
 
 ### Endpoints
 
-- `POST /generate`: Generate a PDF frame template
+- `POST /generate`: Generate a PDF-frame template
   - Request body:
     ```json
     {
