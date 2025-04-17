@@ -8,12 +8,7 @@ A powerful AI-powered PDF-frame template generator that uses fine-tuned language
 
 pdf-frame is a powerful framework for building visually rich PDFs and canvas graphics using declarative syntax. However, crafting these templates —especially for intricate layouts—can be slow and complex. It demands fluency in both visualization concepts and the specifics of pdf-frame's syntax. This friction hinders rapid prototyping and makes onboarding new developers challenging.
 
-The motivation behind this project is to streamline this process using AI, allowing users to describe layouts in natural language and receive valid, ready-to-use template code in return. By fine-tuning large language models on pdf-frame templates, we aim to:
-
-- Reduce the learning curve for new developers
-- Accelerate the prototyping process
-- Enable more intuitive template creation
-- Make complex layouts more accessible
+The motivation behind this project is to streamline this process using AI, allowing users to describe layouts in natural language and receive valid, ready-to-use template code in return.
 
 ## Features
 
