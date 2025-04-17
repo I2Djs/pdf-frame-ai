@@ -34,7 +34,7 @@ The motivation behind this project is to streamline this process using AI, allow
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/pdf-frame-ai.git
+git clone https://github.com/I2Djs/pdf-frame-ai.git
 cd pdf-frame-ai
 ```
 
@@ -90,7 +90,8 @@ generator.load_model()
 
 # Generate a template
 result = generator.generate(
-    "Generate a pdf-frame template for a resume with a modern design and sections for education, experience, and skills."
+    "generate a pie chart with pdf-frame template, to show sales coverage of the following products data: 
+[{product: 'shoes', percent: 0.25}, {product: 'belts', percent: 0.15}, {product: 'tie', percent: 0.35}, {product: 'slippers', percent: 0.25}]"
 )
 print(result)
 ```
@@ -101,7 +102,7 @@ print(result)
 # Generate a template
 curl -X POST "http://localhost:8000/generate" \
      -H "Content-Type: application/json" \
-     -d '{"prompt": "Generate a pdf-frame template for a resume"}'
+     -d '{"prompt": "Generate a pdf-frame template for bar chart"}'
 ```
 
 ## API Documentation
@@ -142,7 +143,7 @@ pdf-frame-ai/
 │   └── api.py         # FastAPI server
 ├── finetune/
 │   └── train.py       # Model fine-tuning code
-├── snaps/            # Directory for saved LoRA weights
+├── lora-models/       # Directory for saved LoRA weights
 ├── requirements.txt  # Python dependencies
 └── README.md        # This file
 ```
