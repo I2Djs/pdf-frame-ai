@@ -2,7 +2,7 @@
 
 > ⚠️ **Work in Progress**: This project is currently in active development and experimentation. The API and model outputs may change as we refine the system. We welcome feedback and contributions!
 
-A powerful AI-powered PDF frame template generator that uses fine-tuned language models to create optimized PDF frame templates based on natural language instructions.
+A powerful AI-powered PDF-frame template generator that uses fine-tuned language models to create optimized PDF frame templates based on natural language instructions.
 
 ## Motivation
 
