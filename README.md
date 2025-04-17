@@ -63,8 +63,8 @@ python finetune/train.py
 ```
 
 The training will:
-- Download the base model from Hugging Face
-- Download the training dataset from Hugging Face
+- Download the base model from Hugging Face `bigcode/starcoder2-7b`
+- Download the training dataset from Hugging Face `https://huggingface.co/datasets/nswamy14/pdf-frame-dataset-1/resolve/main/pdf_frame_dataset_large.jsonl`
 - Fine-tune the model on the dataset
 - Save the LoRA weights locally in the `./snaps/starcoder-pdf-frame-v2` directory
 
