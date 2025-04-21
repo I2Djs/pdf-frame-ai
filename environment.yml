@@ -20,4 +20,4 @@ dependencies:
       - pydantic==2.6.3
       - torch==2.2.1
       - numpy==1.26.4
-      - tqdm==4.66.2
+      - tqdm
