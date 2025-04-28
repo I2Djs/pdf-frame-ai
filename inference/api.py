@@ -85,6 +85,37 @@ async def generate_template(request: GenerateRequest):
             detail=f"Generation failed: {str(e)}"
         )
 
+@app.post("/icl_generate", response_model=GenerateResponse)
+async def generate_template(request: GenerateRequest):
+    """
+    Generate a PDF frame template based on the provided prompt.
+    
+    Args:
+        request (GenerateRequest): The request containing the prompt and optional generation parameters
+        
+    Returns:
+        GenerateResponse: The generated PDF frame template
+        
+    Raises:
+        HTTPException: If generation fails
+    """
+    try:
+        config = GenerationConfig(
+            max_length=request.max_length,
+            temperature=request.temperature,
+            top_p=request.top_p,
+            top_k=request.top_k
+        )
+        
+        template = generator.generate_icl_inference(request.prompt, config)
+        return GenerateResponse(template=template)
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Generation failed: {str(e)}"
+        )
+
 @app.get("/health")
 async def health_check():
     """
