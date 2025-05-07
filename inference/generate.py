@@ -10,6 +10,7 @@ import gc
 from peft import PeftModel
 from accelerate import PartialState
 from pydantic import BaseModel, Field
+from prompts import ICL_INFERENCE_PROMPT, GA_INFERENCE_PROMPT
 
 
 class GenerationConfig(BaseModel):
@@ -115,9 +116,7 @@ class PDFFrameGenerator:
             str: Formatted prompt
         """
         return f"""
-        You are a pdf-frame layout generation agent. Your job is to generate valid and optimized pdf-frame templates based on the given instruction. The output should strictly follow pdf-frame syntax, and may include chart logic, animation, or D3-based computation as needed.
-        
-        ### Instruction:
+        {GA_INFERENCE_PROMPT}
         {prompt}
         \n
         ### Response:
@@ -133,76 +132,7 @@ class PDFFrameGenerator:
             str: Formatted prompt with context and examples
         """
         return f"""
-        You are a specialized layout generation assistant for the `pdf-frame` framework — a declarative system for building PDF or canvas-based graphical templates.
-
-        Important Constraints:
-        - You must ONLY use the official `pdf-frame` tags listed below.
-        - DO NOT use raw <svg>, <g>, <i-arc>, <path> (outside of <i-path>), <clipPath>, <defs>, or any pure SVG elements directly.
-        - All templates must use pdf-frame primitives only.
-        - Animations must use <i-animate> or <i-animatePath> inside allowed primitives
-
-        Below is a reference of `pdf-frame` primitives, their purpose, and key attributes:
-
-        - <i-rect>: Rectangle  
-        `x`, `y`, `width`, `height`, `fill`, `stroke`, `rx`, `ry`
-
-        - <i-circle>: Circle  
-        `cx`, `cy`, `r`, `fill`, `stroke`
-
-        - <i-text>: Text element  
-        `x`, `y`, `text`, `font-size`, `font-weight`, `fill`, `font-family`
-
-        - <i-path>: Path based on SVG `d` commands  
-        `d`, `stroke`, `fill`
-        
-        - `<i-polygon>`: Draws polygons with multiple sides.  
-        `:points` (list of `{{x, y}}` points), `:style` for stroke/fill.
-
-        - `<i-polyline>`: Draws polylines (connected lines).  
-        `:points` (list of `{{x, y}}` points), `:style` for stroke.
-
-        - `<i-ellipse>`: Draws ellipses.  
-        `cx`, `cy`, `rx`, `ry`, `:style` for fill.
-
-        - <i-group>: Container for grouping elements  
-        `:transform` (e.g., {{ translate: [x, y], scale: [sx, sy] }}")
-
-        - <i-animate>: Animation for a primitive element (must be nested)  
-        `:to`, `ease`, `:duration`, `loop`, `direction`, `:delay`
-
-        - <i-animatePath>: Animates `<i-path>` `d` attribute  
-        `:from`, `:to`, `:duration`, `ease`, `loop`, `direction`
-
-        - <i-image>: Embeds an image  
-        `x`, `y`, `width`, `height`, `src`
-
-        - <i-linearGradient>, <i-radialGradient>: For gradient fills
-
-        All elements must be nested inside a `<pdf-frame>` component:
-        <pdf-frame type="canvas" width="600" height="400">
-        <!-- elements go here -->
-        </pdf-frame>
-
-        Below are a few examples:
-        ### Instruction:
-        Generate a bar chart with labels A and B
-
-        ### Response:
-        <template>
-        <pdf-frame type="canvas" width="600" height="400">
-            <i-group :transform="{{ translate: [50, 60] }}'>
-            <i-rect v-for="(d, i) in data" :x="i * 60" :y="200 - d.value" width="40" :height="d.value" fill="teal"/>
-            <i-text v-for="(d, i) in data" :x="i * 60 + 10" y="220" :text="d.label" font-size="12"/>
-            </i-group>
-        </pdf-frame>
-        </template>
-
-        <script setup>
-        const data = [ {{ label: 'A', value: 80 }}, {{ label: 'B', value: 120 }} ]
-        </script>
-        ### End
-
-        ### Instruction:
+        {ICL_INFERENCE_PROMPT}
         {instruction}
 
         ### Response:""".strip()
@@ -278,7 +208,7 @@ class PDFFrameGenerator:
             config = GenerationConfig()
         
         try:
-            icl_prompt = format_inference_prompt(prompt)
+            icl_prompt = format_icl_prompt(prompt)
             inputs = self.tokenizer(icl_prompt, return_tensors="pt")
             input_ids = inputs["input_ids"].to(self.base_model.device)
 
