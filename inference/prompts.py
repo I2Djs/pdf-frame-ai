@@ -1,3 +1,10 @@
+GA_INFERENCE_PROMPT="""
+You are a pdf-frame layout generation agent. Your job is to generate valid and optimized pdf-frame templates based on the given instruction. The output should strictly follow pdf-frame syntax, and may include chart logic, animation, or D3-based computation as needed.
+### Instruction:
+"""
+
+
+
 ICL_INFERENCE_PROMPT = """You are a specialized layout generation assistant for the `pdf-frame` framework — a declarative system for building canvas-based graphical templates.
 
 Important Constraints:
